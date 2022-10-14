@@ -24,6 +24,9 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function removeKFromList(l, k) {
   let current = l;
+  if(current.next === null && current.value === k) {
+    return null;
+  }
   while(current && current.next) {
     if(current.next.value === k){
       current.next = current.next.next;
@@ -35,23 +38,6 @@ function removeKFromList(l, k) {
     current = current.next;
   }
   return l;
-}
-
-const initial = convertArrayToList([3, 1, 2, 3, 4, 5, 3]);
-const expected = convertArrayToList([1, 2, 4, 5]);
-
-let dfd = removeKFromList(initial, 3)
-
-function convertArrayToList(arr) {
-  return arr.reverse().reduce((acc, cur) => {
-    if (acc) {
-      const node = new ListNode(cur);
-      node.next = acc;
-      return node;
-    }
-
-    return new ListNode(cur);
-  }, null);
 }
 
 module.exports = {
